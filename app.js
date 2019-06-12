@@ -4,8 +4,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./config/database')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./app/routes/index');
+var usersRouter = require('./app/routes/users');
 
 var app = express();
 
@@ -22,13 +22,10 @@ app.use('/users', usersRouter);
 
 db.connect(db.MODE_PRODUCTION, function(err) {
     if (err) {
-      console.log('Unable to connect to MySQL.')
-      process.exit(1)
-    } else {
-      app.listen(3002, function() {
-        console.log('DB listening on port 3002...')
-      })
+        console.log('Unable to connect to MySQL.')
+        process.exit(1)
+        } else {
+        console.log('DB connection established...')
     }
-  })
-
+})
 module.exports = app;
